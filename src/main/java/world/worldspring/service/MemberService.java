@@ -1,16 +1,20 @@
 package world.worldspring.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import world.worldspring.domain.Member;
 import world.worldspring.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
 
     // 회원 서비스를 만들려면 회원 리포지토리가 꼭 필요하다.
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

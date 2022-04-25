@@ -1,9 +1,11 @@
 package world.worldspring.repository;
 
+import org.springframework.stereotype.Repository;
 import world.worldspring.domain.Member;
 
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
