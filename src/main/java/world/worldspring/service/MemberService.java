@@ -23,10 +23,19 @@ public class MemberService {
     //회원가입
     public Long join(Member member) {
 
-        validateDuplicateMember(member); // 중복 회원 검증
-        // 가입
-        memberRepository.save(member);
-        return member.getId();
+        // 메소드 호출 시간 측정
+//        long start = System.currentTimeMillis();
+
+//        try {
+            validateDuplicateMember(member); // 중복 회원 검증
+            // 가입
+            memberRepository.save(member);
+            return member.getId();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("join = " + timeMs + "ms");
+//        }
     }
 
     // 같은 이름이 있는 중복 회원X
@@ -44,7 +53,14 @@ public class MemberService {
     }
 
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+//        long start = System.currentTimeMillis();
+//        try {
+            return memberRepository.findAll();
+//        } finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish - start;
+//            System.out.println("findMembers  = " + timeMs + "ms");
+//        }
     }
 
     public Optional<Member> findOne(Long memberId) {
