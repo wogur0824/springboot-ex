@@ -1,13 +1,24 @@
 package world.worldspring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import world.worldspring.repository.JdbcTemplateMemberRepository;
 import world.worldspring.repository.MemberRepository;
 import world.worldspring.repository.MemoryMemberRepository;
 import world.worldspring.service.MemberService;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class SpringConfig {
+
+    private DataSource dataSource;
+
+    @Autowired
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     // 멤버서비스랑 멤버리포지토리를 스프링 빈에 등록해주고 스프링 빈에 등록되어있는 멤버리포지토리를 멤버서비스에 넣어준다.
     @Bean
@@ -17,6 +28,7 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+//        return new MemoryMemberRepository();
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
